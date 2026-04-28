@@ -1,0 +1,252 @@
+import datetime
+from PIL import Image
+import re
+import os
+import sqlite3
+
+A = "QW is AI Training Log "
+print(A.center(28, "="))
+
+DREAM = {
+    "Name": "QW",
+    "Progress": "100%",
+    "Current Status": True,
+    "Skills Set": ("Python", "logic", "AI"),
+    "Final dictionary data": {"name": "QW", "Progress": 100, "status": True, "goal": "Stanford"}
+}
+print(DREAM)
+
+progress = 80
+progress += 20
+print(progress == 100)
+print(progress)
+
+MY_SKILLS = {"python": "90%", "JS": "60%"}
+print(tuple(MY_SKILLS))
+
+name_input = input("What is your name ")
+print(f"Hi {name_input} The Hero of Future world!!\nAwareness AI System is working now")
+
+Mod_option = input("Choose your mod now (Programming, or Study Subjects, or Tired)").strip().title()
+
+if Mod_option == "Programming":
+    print("We are entering The OpenAI zone....Get Ready to build the future")
+    input("Which one will you study (Functions, or Loops)")
+    print("Good Luck!, I wish you success")
+elif Mod_option == "Tired":
+    print("Rest is part of training.\nTake a 20-minute break, the AI is waiting for you.")
+elif Mod_option == "Study Subjects":
+    print("The 1% * does not stop.")
+    STUDY = int(input("**How many Governorate did you solve today?**"))
+    if STUDY >= 4:
+        print("World Performance!!, You are really in the right way to Stanford ")
+    elif STUDY < 4:
+        print("Not Bad!!, But you can do better")
+else:
+    print("This is wrong option")
+
+A_choice = input("Do you wanna know the rest days for the exam, choose(Yes or, No)")
+time_now = datetime.datetime.now()
+time_exam = datetime.datetime(2026, 1, 15)
+if A_choice == "Yes":
+    print(f"The rest days for the exam is {(time_exam) - (time_now)}")
+elif A_choice == "No":
+    print(f"Enjoy your time, {name_input}")
+
+names_list = ["Ahmed", "QW", "Sara", "Quality_Bot", "Ali"]
+ids = [101, 102, 103, 104, 105]
+COMBINED = zip(names_list, ids)
+print(list(COMBINED))
+
+RESULT = [list(filter(lambda n: n.startswith("Q"), names_list))]
+Filtered_list = [n for n in names_list if n.startswith("Q")]
+
+for index, person in enumerate(names_list, start=1):
+    print(f"{person} is {index}")
+
+print(f"The first one letter of the second name is {names_list[1][0:1]}")
+
+print(datetime.datetime.now())
+Time_now = datetime.datetime.now()
+MY_BIRTHDAY = datetime.datetime(2011, 9, 9)
+print(f"I Lived for {(Time_now - MY_BIRTHDAY).days} Days")
+print(datetime.datetime.now().strftime(" today is %A the %d of %b / %Y"))
+
+def security_check(company_func):
+    def wrapper():
+        print("Security check underway")
+        company_func()
+        print("Security is complete")
+    return wrapper
+
+@security_check
+def start_coding():
+    print("I am tired Although that I will complete for ")
+
+start_coding()
+
+def generator_func():
+    yield "Stanford"
+    yield "Open AI"
+    yield "QW"
+
+gen = generator_func()
+print(next(gen))
+print(next(gen))
+
+names = ["Harry", "Tyler", "Henry", "Jon"]
+salaries = [30000, 50000, 20000, 80000]
+jobs = ["Data science", "Cybersecurity", "Programming languages", "AI Engineer"]
+
+for item1, item2, item3 in zip(names, salaries, jobs):
+    print(f"Sir, {item1} your salary without the tax is {item2} because you work as {item3}")
+
+def salaries_generator(salaries_list):
+    for salary in salaries_list:
+        tax = salary * .10
+        yield f"your salary became after tax {(salary) - (tax)}, Because your tax is {tax}"
+
+MY_GEN = salaries_generator(salaries)
+for person in MY_GEN:
+    print(person)
+
+# ملاحظة: تأكدي من وجود الصورة في المسار الصحيح لتشغيل هذا الجزء
+# images = Image.open(r"C:\Users\3bdooo\Documents\Python\AI\OIP (2).jpg")
+# images.show()
+
+time_now_year = datetime.datetime.now().year
+print("Please Enter your Name")
+user_name = input("your name>= :")
+try:
+    print("Please Enter your Birth year")
+    user_birthdate = int(input("your Birthdate>= :"))
+except ValueError:
+    print("Please, Enter Numbers only")
+else:
+    if user_birthdate > 2026 or user_birthdate < 2000:
+        print("Wrong, Please check your date birth")
+    else:
+        print(f"your age is {time_now_year - user_birthdate} ")
+finally:
+    print(f"Bye, I hope you enjoyed, {user_name}")
+
+first_name = input("Please Enter your first name:")
+middle_name = input("Please Enter your middle name:")
+last_name = input("Please Enter your last name:")
+gender = input("Please Enter your gender:")
+email = input("Please Enter your email:")
+
+class Member:
+    def __init__(self, first_n, middle_n, last_n, gend, mail):
+        self.user_first_name = first_n
+        self.user_middle_name = middle_n
+        self.user_last_name = last_n
+        self.gender = gend
+        self.email = mail
+
+    def full_name(self):
+        return f"your name is: {self.user_first_name} {self.user_middle_name} {self.user_last_name}"
+
+member_instance = Member(first_name, middle_name, last_name, gender, email)
+print(member_instance.full_name())
+
+if gender == "female":
+    print(f"Welcome with you, Miss {first_name}".title())
+elif gender == "male":
+    print(f"Welcome with you, Mr {first_name}".title())
+else:
+    print(f"Welcome with you {first_name}".title())
+
+Result_re = re.search(r"[A-z0-9\._]+@(\w+)\.(org|net|com|edu)", email)
+if Result_re is not None:
+    print(Result_re.group())
+else:
+    print("make sure of the email again")
+
+class Bank:
+    total_vaults = 0
+    Not_Allowed_names = ["Jon", "Michel", "Tyo"]
+    def __init__(self, name, stock, take_money_amount, gender_bank):
+        Bank.total_vaults += 1
+        self.name = name
+        self.stock = stock
+        self.gender = gender_bank
+        self.take_money_amount = take_money_amount
+        
+        if name in Bank.Not_Allowed_names:
+            print("WARNING: You Can not open the Money safe")
+        else:
+            print(f"The rest money you have: {int(stock) - int(take_money_amount)}")
+            print("You Have successfully Taken The Money ")
+            if gender_bank == "female":
+                print(f"Goodbye, Miss {name}. I wish you had easy fast service")
+            elif gender_bank == "male":
+                print(f"Goodbye, Mr {name}. I wish you had easy fast service")
+            else:
+                print(f"Goodbye, {name}. I wish you had easy fast service")
+
+assign_grade = int(input("How many mistakes you did :"))
+total_questions = 50
+Sub = int(total_questions - assign_grade)
+
+class Scholar:
+    def __init__(self, name, id_val):
+        self._name = name
+        self._id = id_val
+    @property
+    def name(self):
+        return f"Member:[{self._name}]"
+    @property
+    def ID(self):
+        return f"ID:({self._id})"
+
+if assign_grade >= 50:
+    print("Please check the number should be less than 50")
+else:
+    print(f"YOUR Grades are {Sub} from 50 ")
+
+class Student(Scholar):
+    def __init__(self, name, id_val, level):
+        super().__init__(name, id_val)
+        self._level = level
+    def study(self):
+        print("student is studying python now")
+
+class Instructor(Scholar):
+    def __init__(self, name, id_val, subject):
+        super().__init__(name, id_val)
+        self._subject = subject
+    def check_grade(self):
+        if Sub > 47:
+            print(f"YOUR Grades are great in {self._subject} ")
+        else:
+            print("Not Bad but there is better than that")
+
+DB = sqlite3.connect("Students.db")
+CR = DB.cursor()
+CR.execute("""CREATE TABLE IF NOT EXISTS STUDENTS
+(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, AGE INTEGER, GRADE TEXT, EMAIL TEXT) """)
+
+option = (input("""Please enter your option
+    Insert >= I:
+    Update >= U:
+    Delete >= D:
+    Select >= S:
+    Close  >= C
+    """)).capitalize()
+
+if option == 'I':
+    student_data = [("QW", 14, "QW99@gmail.com", "A+"), ("QR", 14, "QR77@gmail.com", "B")]
+    CR.executemany("INSERT INTO STUDENTS (name, age, email, grade) VALUES (?,?,?,?)", student_data)
+    DB.commit()
+elif option == 'U':
+    CR.execute("UPDATE STUDENTS SET NAME = ? WHERE id = ?", ('AI', 1))
+    DB.commit()
+elif option == 'D':
+    CR.execute("DELETE FROM STUDENTS WHERE grade = ?", ('A+',))
+    DB.commit()
+elif option == 'S':
+    CR.execute("SELECT * FROM STUDENTS ORDER BY age DESC")
+    print(CR.fetchall())
+else:
+    DB.close()
