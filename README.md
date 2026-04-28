@@ -1,7 +1,7 @@
 # 📚 The Learning Journey: Building the Foundation
 
 Welcome to my technical archive! This repository documents my transition from a beginner to a researcher in the fields of AI and Data Science.
-
+This repository contains my early-stage Kaggle competitions, where I mastered the fundamentals of Regression, Classification, and Time Series analysis."
 ## 🚀 Phase 1: Python Essentials
 - **Focus:** Learning syntax, data types, and logical thinking.
 - **Projects:** Basic scripts and problem-solving exercises.
