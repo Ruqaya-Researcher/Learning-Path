@@ -1,0 +1,115 @@
+import numpy as np
+data = { 
+    "day": ["Sat", "Sun", "Mon", "Tue", "Wed", "Thr", "Fri"],
+    "temperature": [23, 28, 24, 28, 31, 22, 37], 
+    "wet": [30, 22, 26, 23, 8, 30, 5]
+}
+
+df = pd.DataFrame(data)
+print("Full DataFrame:\n", df)
+print("\nFirst 5 rows:\n", df.head())
+print("\nDataFrame Info:")
+df.info()
+print("\nStatistical Description:\n", df.descripe)
+tem = df[df["temperature"] > df["temperature"].mean()]
+print(f"\nThe hot days are:\n{tem}")
+
+print("\nDays with temperature > 25:\n", df[df["temperature"] > 25])
+
+# تحليل الرطوبة المنخفضة (تحذير الحرارة)
+wet = df[df["wet"] < 10]
+print(f"\nWARNING: These Days are very hot:\n{wet}")
+
+# حساب القيم العظمى والمتوسطات
+max_temp = df["temperature"].max()
+print(f"\nThe highest temperature of this week is: {max_temp}")
+
+max_wet = df["wet"].max()
+print(f"The highest wet amount of this week is: {max_wet}")
+
+# ترتيب القيم
+print("\nSorted by Temperature (Descending):\n", df.sort_values("temperature", ascending=False))
+print("\nSorted by Wet (Descending):\n", df.sort_values("wet", ascending=False))
+
+mean_temp = df["temperature"].mean()
+print(f"\nThe mean of temperature this week is: {mean_temp}")
+
+mean_wet = df["wet"].mean()
+print(f"The mean of wet this week is: {mean_wet}")
+
+# إضافة أعمدة جديدة (Boolean indexing)
+df["hot"] = df["temperature"] > 30
+df["cold"] = df["temperature"] < 20
+print("\nUpdated DataFrame with Hot/Cold columns:\n", df)
+
+# --- الجزء الخاص بـ Matplotlib للرسوم البيانية ---
+
+# 1. Histogram
+plt.hist(df["temperature"], bins=5, color="Blue", edgecolor="Green")
+plt.title("Temperature Degrees this week")
+plt.xlabel("temperatures")
+plt.ylabel("Frequency")
+plt.show()
+
+# 2. Scatter Plot
+df.plot(kind="scatter", color="green", x="temperature", y="wet")
+plt.title("The Wet days")
+plt.show()
+
+# 3. Bar Chart (Grouped by day)
+ax = df.groupby("day")["temperature"].mean().plot(kind="bar")
+ax.set_ylabel("temperature")
+ax.set_xlabel("day")
+plt.show()
+
+# --- الجزء الخاص بـ NumPy والعمليات على المصفوفات ---
+
+arr = np.array([1, 2, 3])
+print("\nReshaped Array (3,1):\n", arr.reshape(3, 1))
+print("Original Array:", arr)
+print("Type:", type(arr))
+print("Shape:", arr.shape)
+print("Dimensions:", arr.ndim)
+
+# العمليات الحسابية على NumPy
+print("Multiplied by 3:", arr * 3)
+print("Squared:", arr ** 2)
+print("Added by 4:", arr + 4)
+
+# إنشاء مصفوفات خاصة
+zeros = np.zeros(5)
+ones = np.ones(5)
+range_arr = np.arange(0, 10, 2)
+lin = np.linspace(0, 1, 5)
+print("\nZeros:", zeros)
+print("Ones:", ones)
+print("Range Array:", range_arr)
+print("Linspace:", lin)
+
+# العمليات على المصفوفات (Matrices)
+matrix = np.array([[3, 2, 4],
+                  [4, 5, 6]])
+
+print("\nMatrix + 4:\n", matrix + 4)
+print("Matrix + Array (Broadcasting):\n", matrix + arr)
+
+# Slicing & Indexing
+print("\nMatrix Slicing (first 2 columns):\n", matrix[:, 0:2])
+print("Specific element [0,1]:", matrix[0, 1])
+print("First row:", matrix[0])
+print("Second column:", matrix[:, 1])
+print("Matrix Shape:", matrix.shape)
+print(matrix.ndim)
+print(matrix.mean())
+A=np.array([[2,3],
+       [4,5]])
+B=np.array([[6,7,4],
+    [8,9,5]])
+C=np.dot(A,B)
+print(C)
+
+random_matrix=np.random.rand(3,3)
+print(random_matrix)
+
+random_int_matrix=np.random.randint(0,9,(3,3))
+print(random_int_matrix)
